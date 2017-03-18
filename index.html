@@ -108,6 +108,7 @@ input {
   margin: 20px 0;
 }
     </style>
+   
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -134,18 +135,9 @@ input {
     <p id="h"class="lead"><span id="hour">$____</span><span id="hper"> per hour</span></p>
   </div><!-- end results-->
       
-</div><!-- end container -->
-
-  <div id="footer">
-    <div class="container">
-      <p>* Calculated values are only estimates and assumes a 40 hour/week schedule. Does not include income taxes or any other fees.</p>
-    </div>
-  </div>
-               
-       
-                <script>
-                    $(function() { // Routine format; put all your jQuery initialisation inside
-                     var workinghours = 2080; // about 2080 working hours per year
+  <script>
+ $(function() { // Routine format; put all your jQuery initialisation inside
+ var workinghours = 2080; // about 2080 working hours per year
 var workingdays = 260; // about 260 working days per year
 
 var salaryInput = $('input[id="salary"]').numeric({ negative: false });
@@ -182,7 +174,6 @@ salaryInput.keyup(function () {
 });
 
 
-
 $(".dropdown-menu li").on("click", function(event){
     var getSelection = $(this).text();
     $(button).text(getSelection);
@@ -213,6 +204,23 @@ $(document).ready(function() {
   $("#y").hide();
 }); // Routine format; put all your jQuery initialisation inside
                 </script>
+               
+                
+                
+                
+                
+                
+                
+                
+ </div><!-- end container -->
 
+  <div id="footer">
+    <div class="container">
+      <p>* Calculated values are only estimates and assumes a 40 hour/week schedule. Does not include income taxes or any other fees.</p>
+    </div>
+  </div>
+               
+       
+               
                
 </body>
