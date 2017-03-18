@@ -135,8 +135,8 @@ input {
   </div><!-- end results-->
       
   <script>
- $(function() { // Routine format; put all your jQuery initialisation inside
- var workinghours = 2080; // about 2080 working hours per year
+ $(function() { 
+     var workinghours = 2080; // about 2080 working hours per year
 var workingdays = 260; // about 260 working days per year
 
 var salaryInput = $('input[id="salary"]').numeric({ negative: false });
@@ -173,6 +173,7 @@ salaryInput.keyup(function () {
 });
 
 
+
 $(".dropdown-menu li").on("click", function(event){
     var getSelection = $(this).text();
     $(button).text(getSelection);
@@ -200,8 +201,9 @@ $(".dropdown-menu li").on("click", function(event){
 
 $(document).ready(function() {
   $("li:first-child").hide();
-  $("#y").hide()
-
+  $("#y").hide();
+});
+ }
   </script>
                
                 
