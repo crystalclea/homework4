@@ -1,0 +1,218 @@
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Homework 4</title>
+
+</head>
+
+<body>
+    <style>
+        @import url('http://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+  font: normal 100% "Open Sans", sans-serif;
+  color: #2E3640;
+  width:90%;
+  margin: 0 auto;
+}
+
+p {
+  font-size:1.3em;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+div.lead {
+  margin-bottom: 40px;
+}
+
+.btn {
+  color: #2E3640;
+  border: 2px solid #2E3640;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #f2f2f2;
+  background-color: #2E3640;
+  text-decoration: none;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background-color: #376493;
+  border-color: #345679;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #345679;
+  border-color: #345679;
+}
+
+.dropdown-menu>li>a:hover {
+  background-color: #376493;
+}
+
+#results p.lead {
+  margin-bottom: 0;
+}
+
+#yper {
+  color: #C6655E;
+}
+
+#hper {
+  color: #95CD9C;
+}
+
+#mper {
+  color: #6DBCDB;
+}
+
+input {
+  width: 150px;
+}
+
+.btn-group {
+  margin: 0 0 4px 1px;
+}
+
+#footer {
+  margin-top: 50px;
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+#footer p {
+  margin: 20px 0;
+}
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+          <h1>Salary Calculator</h1>
+  <p class="lead">If you make...</p>
+  <div class="lead">
+      $ <input id="salary" type="text">
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary">per year</button>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li id="yearSelect"><a href="#" >per year</a></li>
+          <li id="monthSelect"><a href="#" >per month</a></li>
+          <li id="hourSelect"><a href="#">per hour</a></li>
+        </ul>
+      </div>
+  </div>
+    <p class="lead">You would make about...</p>
+  <div id="results">
+    <p id="y" class="lead"><span id="year">____</span><span id="yper"> per year</span></p>
+    <p id="m" class="lead"><span id="month">$____</span><span id="mper"> per month</span></p>
+    <p id="h"class="lead"><span id="hour">$____</span><span id="hper"> per hour</span></p>
+  </div><!-- end results-->
+      
+</div><!-- end container -->
+
+  <div id="footer">
+    <div class="container">
+      <p>* Calculated values are only estimates and assumes a 40 hour/week schedule. Does not include income taxes or any other fees.</p>
+    </div>
+  </div>
+               
+       
+                <script>
+                    $(function() { // Routine format; put all your jQuery initialisation inside
+                     var workinghours = 2080; // about 2080 working hours per year
+var workingdays = 260; // about 260 working days per year
+
+var salaryInput = $('input[id="salary"]').numeric({ negative: false });
+
+var button = $("button:first-child");
+
+salaryInput.keyup(function () {
+  var salary = $(this).val();
+  
+  if (button.text() === "per year") {  
+    // calculate salaries and limit to 2 decimal places
+    var monthsalary = (salary / 12).toFixed(2);
+    var hoursalary = (salary / workinghours).toFixed(2);
+
+    $("#month").html("$" + monthsalary);
+    $("#hour").html("$" + hoursalary);
+  }
+
+  else if (button.text() === "per month") {
+    var yearsalary = (salary * 12).toFixed(2);
+    var hoursalary = (salary / (workinghours / 12)).toFixed(2);
+
+    $("#year").html("$" + yearsalary);
+    $("#hour").html("$" + hoursalary);
+  }
+    
+  else if (button.text() === "per hour") {
+    var yearsalary = (salary * workinghours).toFixed(2);
+    var monthsalary = (yearsalary / 12).toFixed(2);
+
+    $("#year").html("$" + yearsalary);
+    $("#month").html("$" + monthsalary);
+  }
+});
+
+
+
+$(".dropdown-menu li").on("click", function(event){
+    var getSelection = $(this).text();
+    $(button).text(getSelection);
+    $(".dropdown-menu").children("li").show();
+    $(this).hide();
+    $("p.lead span:first-child").text("$____");
+    salaryInput.keyup();
+  
+  if (this.id == "monthSelect") {
+    $("#results p").show();
+    $("#m").hide();
+  }
+  
+  else if (this.id == "yearSelect") {
+    $("#results p").show();
+    $("#y").hide();
+  }
+    
+  else if (this.id == "hourSelect") {
+    $("#results p").show();
+    $("#h").hide();
+  }
+  
+});
+
+$(document).ready(function() {
+  $("li:first-child").hide();
+  $("#y").hide();
+}); // Routine format; put all your jQuery initialisation inside
+                </script>
+
+               
+</body>
